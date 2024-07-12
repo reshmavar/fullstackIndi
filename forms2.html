@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            td {
+                display: block;
+                width: 100%;
+            }
+
+            td:first-child {
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            tr {
+                display: block;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Registration Form</h1>
+
+        <form name="myform" method="post" onsubmit="return validate()">
+
+            <table>
+                <!-- First Name -->
+                <tr>
+                    <td>First Name</td>
+                    <td><input type="text" name="fname" maxlength="30" required></td>
+                </tr>
+
+                <!-- Last Name -->
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" name="lname" maxlength="30" required></td>
+                </tr>
+
+                <!-- DOB -->
+                <tr>
+                    <td>Date of Birth</td>
+                    <td><input type="date" name="date" id="date" min="1981-01-01" required></td>
+                </tr>
+
+                <!-- Email ID -->
+                <tr>
+                    <td>Email ID</td>
+                    <td><input type="email" name="email" maxlength="100" required></td>
+                </tr>
+
+                <!-- Phone no. -->
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="tel" name="phone" pattern="[0-9]{10}" required></td>
+                </tr>
+
+                <!-- Gender radio button -->
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        Male <input type="radio" name="gender" value="male" required>
+                        Female <input type="radio" name="gender" value="female" required>
+                    </td>
+                </tr>
+
+                <!-- Address -->
+                <tr>
+                    <td>Address</td>
+                    <td><textarea name="address" cols="30" rows="3" required></textarea></td>
+                </tr>
+
+                <!-- State select tag -->
+                <tr>
+                    <td>State</td>
+                    <td>
+                        <select id="state" name="state" required>
+                            <option value="">Select a state</option>
+                            <option value="maharashtra">Maharashtra</option>
+                            <option value="karnataka">Karnataka</option>
+                            <option value="delhi">Delhi</option>
+                            <option value="kolkata">Mumbai</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <!-- Country -->
+                <tr>
+                    <td>Country</td>
+                    <td><input type="text" value="India" name="country" readonly="readonly"></td>
+                </tr>
+
+                <!-- Hobbies checkbox -->
+                <tr>
+                    <td>Hobbies</td>
+                    <td>
+                        Drawing <input type="checkbox" name="hobby" value="draw">
+                        Playing <input type="checkbox" name="hobby" value="play">
+                        Swimming <input type="checkbox" name="hobby" value="swim">
+                        Travelling <input type="checkbox" name="hobby" value="travel">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="submit" value="Submit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        function validate() {
+            var first = document.forms["myform"]["fname"].value;
+            var last = document.forms["myform"]["lname"].value;
+            var date = document.forms["myform"]["date"].value;
+            var email = document.forms["myform"]["email"].value;
+            var phone = document.forms["myform"]["phone"].value;
+            var gender = document.forms["myform"]["gender"].value;
+            var address = document.forms["myform"]["address"].value;
+            var state = document.forms["myform"]["state"].value;
+            var hobbies = document.forms["myform"]["hobby"];
+
+            // first name validation
+            if (first == "") {
+                alert("Enter the first name");
+                return false;
+            }
+            if (!isNaN(first)) {
+                alert("First name should be in characters");
+                return false;
+            }
+
+            for( let a = 0; a < first.length; a++) {
+
+                let ch = first.charAt(a);
+
+                if(ch === '1' || ch ==='2'||ch === '3' || ch ==='4'||ch === '5' || ch ==='6' ||ch === '7' || ch ==='8' || ch === '9' || ch ==='0') {
+                    alert("First name should be in characters");
+                    return false;
+                }
+            }
+
+            // last name validation
+            if (last == "") {
+                alert("Enter the last name");
+                return false;
+            }
+            if (!isNaN(last)) {
+                alert("Last name should be in characters");
+                return false;
+            }
+
+            // DOB validation
+            if (date == "") {
+                alert("Enter date");
+                return false;
+            }
+
+            // email validation
+            var at = email.indexOf("@");
+            var dot = email.lastIndexOf(".");
+            if (at < 1 || dot < at + 2 || dot + 2 >= email.length) {
+                alert("Not a valid email");
+                return false;
+            }
+
+            // phone no. validation
+            if (phone == "") {
+                alert("Enter phone number");
+                return false;
+            }
+            if (isNaN(phone)) {
+                alert("Phone number should be in digits");
+                return false;
+            }
+            if (phone.length != 10) {
+                alert("Phone number must be 10 digits");
+                return false;
+            }
+
+            // gender radio validation
+            if (!document.querySelector('input[name="gender"]:checked')) {
+                alert("Select a gender");
+                return false;
+            }
+
+            // address validation
+            if (address == "") {
+                alert("Enter an address");
+                return false;
+            }
+
+            // state validation
+            if (state == "Select a state") {
+                alert("Select a state");
+                return false;
+            }
+
+            // hobbies validation
+            var hobbyChecked = false;
+            for (let i = 0; i < hobbies.length; i++) {
+                if (hobbies[i].checked) {
+                    hobbyChecked = true;
+                    break;
+                }
+            }
+
+            if (!hobbyChecked) {
+                alert("Select at least one hobby");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
